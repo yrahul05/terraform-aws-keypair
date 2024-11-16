@@ -26,6 +26,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install pre-commit
 
-      # Step 4: Run pre-commit hooks
+      # Step 4: Fix executable permissions for non-scripts
+      - name: Fix file permissions
+        run: |
+          # Find and fix non-script files with executable permissions
+          find . -type f -not -path './.git/*' -not -path './.venv/*' -perm /111 \
+            -exec sh -c "file {} | grep -q 'script' || chmod -x {}" \;
+
+      # Step 5: Run pre-commit hooks
       - name: Run pre-commit
         run: pre-commit run --all-files
+
+      # Step 6: Check if any files were modified by hooks
+      - name: Check for changes
+        run: |
+          if ! git diff --quiet; then
+            echo "Pre-commit hooks modified files. Please commit the changes.";
+            git diff;
+            exit 1;
+          fi
