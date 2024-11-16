@@ -1,0 +1,39 @@
+name: tfsec
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  tfsec:
+    name: TFSEC SARIF Report
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Run TFSEC to generate a SARIF report
+      - name: Run TFSEC
+        uses: aquasecurity/tfsec-sarif-action@v0.1.4
+        with:
+          sarif_file: tfsec.sarif
+          full_repo_scan: true
+
+      # Step 3: Add TFSEC scan comments to Pull Requests
+      - name: TFSEC PR Commenter
+        uses: tfsec/tfsec-pr-commenter-action@v1.3.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 4: Run advanced Terraform security scan (optional)
+      - name: Terraform Security Scan
+        uses: triat/terraform-security-scan@v3.1.0
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tfsec_actions_comment: true
+          tfsec_output_format: sarif
+        continue-on-error: true
