@@ -36,7 +36,7 @@ jobs:
       - name: Run pre-commit
         run: pre-commit run --all-files
 
-      # Step 6: Check if any files were modified by hooks
+      # Step 6: Check for changes after pre-commit
       - name: Check for changes after pre-commit
         run: |
           if ! git diff --quiet; then
@@ -45,10 +45,12 @@ jobs:
             git config --global user.name "GitHub Actions"
             git add .
             git commit -m "Apply pre-commit fixes"
+          else
+            echo "No changes made by pre-commit hooks."
           fi
 
       # Step 7: Push changes back to the repository (only for push events)
       - name: Push changes
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && steps.check-changes.outputs.changed == 'true'
         run: |
           git push
