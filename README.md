@@ -39,7 +39,7 @@ module "public_keypair" {
   name        = "public-key"
   environment = "test"
   label_order = ["name", "environment"]
-  public_key  = "ssh-rsa AB3NzaC1yc2EAAAADAQABAAABgQChJ2VNjqGjWiwOt0qX6PvXKkqNXF/XXPdOCrMB6KqeS63IeiQiwtc8w2S+Q91hnPXRRgpBkAC1xJpsrpouo9SHd9wacuBbafgNgHqBwALCZuYs3UESaT8r2/5Dr13r5xAcH3RNBS7NLHjGiQWRdlMeAO6o5uRolcq7pla5ol4KvuwpnCmpe/77O/6C+ZwRK6UYgmFWUByUXFvd7UutQemXa1gP/6eerSdw7w5CvWAtt3GupEY6Tz208Sc0E7pgcHjaikN2UQ8u3x9wTsAotibqsIKwpzKrY1Yud3dZnBL/cCr8E8uC7bmIsoqnI8vW7VWzUNWWDmuWNX3ILprd3EpZZRUQ4c6o4hW/1gVUxjtUnFdDgkZoWy/8xmfJFd9FwGsQ2yYDKZviRyaIFhGAtNDK2FOz1VhBA/zFxSsX40AcD7XACJAH3VZaCBQYczsU+aWrt4yxbI5V9/3k0Xuz3RZyVznxe49teE+CgcHecVEKU01hzpeAUv3g37lvmuHVGhM= rahul@rahul"
+  public_key  = "ssh-rsa AB3NzaC1yc2EAAAADAQABAAABgQDiauRRhSL3KprhrjrepCfebnrAERnFMR8DFXgwM4rLmXdI9M6sbP1dn2o9Vurf8Bznm2uBZttTPTi8lxnS4YSG4Q+F0nU98tYxXSEb66zp8b/ZcICT2kqMC6suEO3U7IG8wasXCoxOyJ5lqBi8xrmQKBgTZKk6EvO9SSpSishpAP2hafnIuP29RqipraT9UvNeMSbM3/OTjV9I2/KHd/YfSzrUQbnQ6zTgNawyZ8CaRo/Intot3HgU/5PsOKPcTlarb0sFXuWDhdcE+/8TPsjFTPOzMFBDr+H11Oq+cxMoQ/YMXLo/KmokM/km/NfLvEvscuDFzA7JLURiaV33MoQxxIfaTwvrQZ9UJ4gdzd4WhF1sVNB3MP7z07I8pBepJVwca1fTWI9hvn6xK3a6nfD6p8gKiP5xlINMZX7Oi9tmhFuv4vxkYiGZvAI12va9InJFZUQEHmJaIr4g7Faczl5oFK6TYc1FRut9ve4v0JKbz7Od3Uwyqd6rSeHxm/obp1E= rahul@rahul"
 
 }
 ```
@@ -71,8 +71,8 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 ## Modules
 
-| Name | Source                                                | Version |
-|------|-------------------------------------------------------|---------|
+| Name | Source | Version |
+|------|--------|---------|
 | <a name="module_labels"></a> [labels](#module\_labels) | git::git@github.com:yrahul05/terraform-aws-labels.git | v1.0.0 |
 
 ## Resources
@@ -84,16 +84,19 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 ## Inputs
 
-| Name | Description                                                                                                      | Type | Default      | Required |
-|------|------------------------------------------------------------------------------------------------------------------|------|--------------|:--------:|
-| <a name="input_attributes"></a> [attributes](#input\_attributes) | Additional attributes (e.g. `1`).                                                                                | `list(string)` | `[]`         | no |
-| <a name="input_create_private_key_enabled"></a> [create\_private\_key\_enabled](#input\_create\_private\_key\_enabled) | Determines whether a private key will be created                                                                 | `bool` | `false`      | no |
-| <a name="input_enable_key_pair"></a> [enable\_key\_pair](#input\_enable\_key\_pair) | A boolean flag to enable/disable key pair.                                                                       | `bool` | `true`       | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | Environment (e.g. `prod`, `dev`, `staging`).                                                                     | `string` | `""`         | no |
-| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | label order, e.g. `name`,`application`.                                                                          | `list(any)` | `[]`         | no |
-| <a name="input_managedby"></a> [managedby](#input\_managedby) | ManagedBy, eg 'yrahul05'.                                                                                        | `string` | `"yrahul05"` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name  (e.g. `app` or `cluster`).                                                                                 | `string` | `""`         | no |
-| <a name="input_private_key_algorithm"></a> [private\_key\_algorithm](#input\_private\_key\_algorithm) | Name of the algorithm to use when generating the private key. Currently-supported values are `RSA` and `ED25519` | `string` | `"RSA"`      | no |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_attributes"></a> [attributes](#input\_attributes) | Additional attributes (e.g. `1`). | `list(string)` | `[]` | no |
+| <a name="input_create_private_key_enabled"></a> [create\_private\_key\_enabled](#input\_create\_private\_key\_enabled) | Determines whether a private key will be created | `bool` | `false` | no |
+| <a name="input_enable_key_pair"></a> [enable\_key\_pair](#input\_enable\_key\_pair) | A boolean flag to enable/disable key pair. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
+| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | label order, e.g. `name`,`application`. | `list(any)` | `[]` | no |
+| <a name="input_managedby"></a> [managedby](#input\_managedby) | ManagedBy, eg 'yrahul05'. | `string` | `"yrahul05"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name  (e.g. `app` or `cluster`). | `string` | `""` | no |
+| <a name="input_private_key_algorithm"></a> [private\_key\_algorithm](#input\_private\_key\_algorithm) | Name of the algorithm to use when generating the private key. Currently-supported values are `RSA` and `ED25519` | `string` | `"RSA"` | no |
+| <a name="input_public_key"></a> [public\_key](#input\_public\_key) | Name  (e.g. `ssh-rsa AB3NzaC1yc2EAAAADAQABAAABAQD3F6tyPEFEzV0LX3X8BsXdMsQ`). | `string` | `""` | no |
+| <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://git@github.com/yrahul05/terraform-aws-keypair?ref=v1.0.0"` | no |
+
 ## Outputs
 
 | Name | Description |
