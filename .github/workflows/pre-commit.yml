@@ -26,11 +26,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install pre-commit
 
-      # Step 4: Run pre-commit hooks
+      # Step 4: Remove executable permissions from non-executable files
+      - name: Remove executable permissions from non-executable files
+        run: |
+          # Remove executable permissions from non-executable files
+          find . -type f -not -path "./.git/*" -exec chmod -x {} \;
+
+      # Step 5: Run pre-commit hooks
       - name: Run pre-commit
         run: pre-commit run --all-files
 
-      # Step 5: Check if any files were modified by hooks
+      # Step 6: Check if any files were modified by hooks
       - name: Check for changes after pre-commit
         run: |
           if ! git diff --quiet; then
@@ -41,7 +47,7 @@ jobs:
             git commit -m "Apply pre-commit fixes"
           fi
 
-      # Step 6: Push changes back to the repository (only for push events)
+      # Step 7: Push changes back to the repository (only for push events)
       - name: Push changes
         if: github.event_name == 'push'
         run: |
